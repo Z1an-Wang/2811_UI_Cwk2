@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
 
     // the widget that will show the video
     QVideoWidget *videoWidget = new QVideoWidget;
-	//videoWidget -> setBaseSize(600, 300);
+	// videoWidget -> setBaseSize(600, 300);
 
     // the QMediaPlayer which controls the playback
     ThePlayer *player = new ThePlayer;

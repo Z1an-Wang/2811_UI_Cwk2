@@ -5,7 +5,10 @@
         "vector": "cpp",
         "ios": "cpp",
         "string": "cpp",
-        "string_view": "cpp"
+        "string_view": "cpp",
+        "qfileinfo": "cpp",
+        "qapplication": "cpp",
+        "qpushbutton": "cpp"
     },
      "files.exclude": {
         //  "**/*.pro":true,
