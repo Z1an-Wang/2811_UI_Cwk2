@@ -8,7 +8,8 @@
         "string_view": "cpp",
         "qfileinfo": "cpp",
         "qapplication": "cpp",
-        "qpushbutton": "cpp"
+        "qpushbutton": "cpp",
+        "qmediaplaylist": "cpp"
     },
      "files.exclude": {
         //  "**/*.pro":true,

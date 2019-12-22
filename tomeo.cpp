@@ -17,6 +17,8 @@
 #include <string>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QScrollArea>
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QFileIconProvider>
 #include <QImageReader>
@@ -78,7 +80,7 @@ int main(int argc, char *argv[]) {
 
     // the widget that will show the video
     QVideoWidget *videoWidget = new QVideoWidget;
-	// videoWidget -> setBaseSize(600, 300);
+	videoWidget -> setBaseSize(600, 480);
 
     // the QMediaPlayer which controls the playback
     ThePlayer *player = new ThePlayer;
@@ -90,12 +92,16 @@ int main(int argc, char *argv[]) {
     std::vector<TheButton*> buttons;
     // the buttons are arranged horizontally
     QHBoxLayout *layout = new QHBoxLayout();
-    buttonWidget->setLayout(layout);
-
+    buttonWidget ->setLayout(layout);
+    buttonWidget -> setFixedWidth(1540);
+    buttonWidget -> setFixedHeight(150);
+    QScrollArea* buttonScroll = new QScrollArea();
+    buttonScroll -> setWidget(buttonWidget);
+    buttonScroll -> setFixedHeight(170);
 
     // create the four buttons
-    for ( int i = 0; i < 4; i++ ) {
-        TheButton *button = new TheButton(buttonWidget);
+    for ( size_t i = 0; i < videos.size(); i++ ) {
+        TheButton *button = new TheButton(buttonScroll);
         button->connect(button, SIGNAL(jumpTo(TheButtonInfo* )), player, SLOT (jumpTo(TheButtonInfo* ))); // when clicked, tell the player to play.
         buttons.push_back(button);
         layout->addWidget(button);
@@ -105,6 +111,15 @@ int main(int argc, char *argv[]) {
     // tell the player what buttons and videos are available
     player->setContent(&buttons, & videos);
 
+    QSlider *volumeSlider = new QSlider(Qt::Horizontal);
+    volumeSlider->setRange(0, 100);
+    volumeSlider->setTickPosition(QSlider::TicksBelow);
+    volumeSlider->setTickInterval(10);
+    volumeSlider->setValue(_initVolume);
+
+    QSlider::connect(volumeSlider, SIGNAL(valueChanged(int)), player, SLOT(setVolume(int)));
+    QMediaPlayer::connect(player, SIGNAL(volumeChanged(int)), volumeSlider, SLOT(setValue(int)));
+
     // create the main window and layout
     QWidget window;
     QVBoxLayout *top = new QVBoxLayout();
@@ -113,10 +128,11 @@ int main(int argc, char *argv[]) {
 
     // add the video and the buttons to the top level widget
 	top->addWidget(videoWidget);
-    top->addWidget(buttonWidget);
+    top->addWidget(buttonScroll);
+    top->addWidget(volumeSlider);
 
-	window.setMinimumSize(800, 680);
-	window.setGeometry(40, 40, 800, 680);
+	window.setMinimumSize(300, 200);
+	window.setGeometry(0, 0, 800, 680);
 
     // showtime!
     window.show();
