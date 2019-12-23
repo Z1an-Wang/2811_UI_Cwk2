@@ -5,11 +5,13 @@
 #include <string>
 #include <QApplication>
 #include <QtGui>
+#include <QDebug.h>
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <QtMultimedia/QMediaPlayer.h>
 #include <QtMultimedia/QMediaPlaylist.h>
 
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QScrollArea>
@@ -36,9 +38,6 @@ public:
 	void Init_All();
 
 
-
-
-
 private:
 	QWidget *window;
 	vector<TheButtonInfo> GetInfoIn(string);
@@ -48,11 +47,6 @@ private:
 	QVideoWidget * videoWidget;
 	ThePlayer * videoPlayer;	// Used in Set_VideoButton to set video content
 
-	void Set_VideoButton();
-	QScrollArea * buttonScroll;
-
-	void Set_ControlButton();
-
 	void Set_VolumeSlider();
 	QSlider * volumeSlider;
 	int volume_;
@@ -60,6 +54,17 @@ private:
 	void Set_BrightSlider();
 	QSlider * brightSlider;
 	int bright_;
+
+	void Set_ControlButton();
+	QHBoxLayout * controlBarLayout_;
+	QPushButton * nextVideo_;
+	QPushButton * frontVideo_;
+	QPushButton * pauseVideo_;
+	QPushButton * playVideo_;
+
+
+	void Set_VideoButton();
+	QScrollArea * buttonScroll;
 
 
 	void Make_Connections();

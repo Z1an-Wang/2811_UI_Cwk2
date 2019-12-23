@@ -8,6 +8,7 @@
 
 #include <QApplication>
 #include <QMediaPlayer>
+#include <QDebug.h>
 #include "the_button.h"
 #include <vector>
 
@@ -29,7 +30,7 @@ private:
     int currentVideo_;
 
 public:
-    ThePlayer(QWidget *parent) : QMediaPlayer(parent) {
+    ThePlayer(QObject *parent) : QMediaPlayer(parent) {
         setVolume(kInitVolume);     // be slightly less annoying
         connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );
     }
@@ -37,7 +38,6 @@ public:
     // all buttons have been setup, store pointers here
     void setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i);
 
-	void Set_VideoCount();
 
 private slots:
 
@@ -47,6 +47,8 @@ public slots:
 
     // start playing this ButtonInfo
     void jumpTo (TheButtonInfo* button);
+	void jumpNext();
+	void jumpFront();
 };
 
 #endif //CW2_THE_PLAYER_H

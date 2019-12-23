@@ -17,11 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     tomeo.cpp \
     the_player.cpp \
-    the_button.cpp
+    the_button.cpp \
+    Main_Grid.cpp
 
 HEADERS += \
     the_player.h \
-    the_button.h
+    the_button.h \
+    Main_Grid.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
