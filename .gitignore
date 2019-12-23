@@ -4,6 +4,10 @@
 .gitignore
 Resources/
 .DS_Store
+Debug/
+Release/
+*.ui
+*.qrc
 
 sftp.json
 
@@ -76,4 +80,3 @@ Thumbs.db
 # --------
 *.dll
 *.exe
-

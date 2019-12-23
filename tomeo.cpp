@@ -132,7 +132,7 @@ int main(int argc, char *argv[]) {
     top->addWidget(volumeSlider);
 
 	window.setMinimumSize(300, 200);
-	window.setGeometry(0, 0, 800, 680);
+	window.setGeometry(40, 40, 800, 680);
 
     // showtime!
     window.show();
