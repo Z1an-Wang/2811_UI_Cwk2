@@ -44,8 +44,9 @@ void Main_Grid::Init_All() {
 	this->Set_VideoPlayer();
 	this->Set_VideoButton();
 	this->Set_VolumeSlider();
+	this->Set_BrightSlider();
 
-	setSpacing(10);
+	setSpacing(5);
 
 	for (int i = 0; i < 12; i++) {
 		setColumnStretch(i, 1);
@@ -54,6 +55,7 @@ void Main_Grid::Init_All() {
 	setRowStretch(1, 1);
 	setRowStretch(2, 0);
 	setRowStretch(3, 0);
+	setRowStretch(4, 0);
 
 	this->Make_Connections();
 
@@ -90,7 +92,7 @@ void Main_Grid::Set_VideoButton() {
 
 	buttonWidget->setFixedWidth(1540);
 	buttonWidget->setFixedHeight(150);
-
+	buttonScroll->setAlignment(Qt::AlignCenter);
 	buttonScroll->setWidget(buttonWidget);
 
 
@@ -124,16 +126,25 @@ void Main_Grid::Set_VolumeSlider() {
 	volumeSlider->setTickInterval(10);
 	volumeSlider->setValue(kInitVolume);
 
-	volumeSlider->setFixedHeight(50);
+	volumeSlider->setFixedHeight(25);
 	this->addWidget(volumeSlider, 3, 1, 1, 10);
 }
 
 void Main_Grid::Set_BrightSlider() {
+	this->brightSlider = new QSlider(Qt::Horizontal);
+	brightSlider->setRange(-100, 100);
+	brightSlider->setTickPosition(QSlider::TicksBelow);
+	brightSlider->setTickInterval(20);
+	brightSlider->setValue(kInitBright);
 
+	brightSlider->setFixedHeight(25);
+	this->addWidget(brightSlider, 4, 1, 1, 10);
 }
 
 void Main_Grid::Make_Connections() {
 	QSlider::connect(volumeSlider, SIGNAL(valueChanged(int)), videoPlayer, SLOT(setVolume(int)));
 	QMediaPlayer::connect(videoPlayer, SIGNAL(volumeChanged(int)), volumeSlider, SLOT(setValue(int)));
 
+	QSlider::connect(brightSlider, SIGNAL(valueChanged(int)), videoWidget, SLOT(setBrightness(int)));
+	QVideoWidget::connect(videoWidget, SIGNAL(brightnessChanged(int)), brightSlider, SLOT(setValue(int)));
 }

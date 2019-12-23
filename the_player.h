@@ -15,7 +15,7 @@
 using namespace std;
 
 const int kInitVolume = 10;
-const int kInitBright = 85;
+const int kInitBright = 0;
 
 class ThePlayer : public QMediaPlayer {
 

@@ -5,6 +5,7 @@
 #include <string>
 #include <QApplication>
 #include <QtGui>
+#include <QtCore>
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <QtMultimedia/qmediaplayer.h>
 #include <QtMultimedia/qmediaplaylist.h>
@@ -17,8 +18,6 @@
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QFileIconProvider>
 #include <QImageReader>
-#include <QtCore/QDir>
-#include <QtCore/QDirIterator>
 
 #include "the_player.h"
 #include "the_button.h"
@@ -56,6 +55,7 @@ private:
 	void Set_VolumeSlider();
 	QSlider * volumeSlider;
 	int volume_;
+
 	void Set_BrightSlider();
 	QSlider * brightSlider;
 	int bright_;
