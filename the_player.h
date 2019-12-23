@@ -14,7 +14,8 @@
 
 using namespace std;
 
-const int _initVolume = 10;
+const int kInitVolume = 10;
+const int kInitBright = 85;
 
 class ThePlayer : public QMediaPlayer {
 
@@ -29,8 +30,8 @@ private:
     long currentCount = 0;
 
 public:
-    ThePlayer() : QMediaPlayer(NULL) {
-        setVolume(_initVolume);     // be slightly less annoying
+    ThePlayer(QWidget *parent) : QMediaPlayer(parent) {
+        setVolume(kInitVolume);     // be slightly less annoying
         connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );
 
         mTimer = new QTimer(NULL);
