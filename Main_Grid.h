@@ -5,16 +5,17 @@
 #include <string>
 #include <QApplication>
 #include <QtGui>
-#include <QtCore>
 #include <QtMultimediaWidgets/QVideoWidget>
-#include <QtMultimedia/qmediaplayer.h>
-#include <QtMultimedia/qmediaplaylist.h>
+#include <QtMultimedia/QMediaPlayer.h>
+#include <QtMultimedia/QMediaPlaylist.h>
 
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QLabel>
 
+#include <QtCore/QDir.h>
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QFileIconProvider>
 #include <QImageReader>
@@ -41,7 +42,7 @@ public:
 private:
 	QWidget *window;
 	vector<TheButtonInfo> GetInfoIn(string);
-	vector<TheButtonInfo> videos;
+	vector<TheButtonInfo> videos_;
 
 	void Set_VideoPlayer();
 	QVideoWidget * videoWidget;

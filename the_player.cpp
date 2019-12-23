@@ -9,11 +9,24 @@
 // To pass the two reference to the data field of the player class
 // Then jumpTo the first video to play
 void ThePlayer::setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i){
-    buttons = b;
-    infos = i;
-    jumpTo(buttons -> at(0) -> info);
+    this->buttons_ = b;
+    this->infos_ = i;
+    jumpTo(buttons_ -> at(0) -> info);
 }
 
+
+
+void ThePlayer::Set_VideoCount() {
+	this->totalVideo_ = buttons_->size();
+	this->currentVideo_ = 0;
+}
+
+
+
+
+
+
+// SLOT Define in <the_player> class
 
 void ThePlayer::playStateChanged (QMediaPlayer::State ms) {
 }

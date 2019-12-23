@@ -10,7 +10,6 @@
 #include <QMediaPlayer>
 #include "the_button.h"
 #include <vector>
-#include <QTimer>
 
 using namespace std;
 
@@ -24,24 +23,21 @@ Q_OBJECT
 private:
     // Contains the datafile with botton object and info( Icon and Video Url)
     // Video Url used to create MediaContent [ QMediaContent(const QUrl &url) ]
-    std::vector<TheButtonInfo>* infos;
-    std::vector<TheButton*>* buttons;
-    QTimer* mTimer;
-    long currentCount = 0;
+    std::vector<TheButtonInfo>* infos_;
+    std::vector<TheButton*>* buttons_;
+	int totalVideo_;
+    int currentVideo_;
 
 public:
     ThePlayer(QWidget *parent) : QMediaPlayer(parent) {
         setVolume(kInitVolume);     // be slightly less annoying
         connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );
-
-        mTimer = new QTimer(NULL);
-        mTimer->setInterval(1000); // 1000ms is one second between ...
-        mTimer->start();
-        // connect(mTimer, SIGNAL(timeout()), SLOT(shuffle())); // ...running shuffle method
     }
 
     // all buttons have been setup, store pointers here
     void setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i);
+
+	void Set_VideoCount();
 
 private slots:
 

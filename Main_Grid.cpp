@@ -34,15 +34,16 @@ vector<TheButtonInfo> Main_Grid::GetInfoIn(string loc) {
 void Main_Grid::Init_All() {
 
 	// collect all the videos in the folder
-	videos = GetInfoIn("./Resources/video");
+	videos_ = GetInfoIn("./Resources/video");
 
-	if (videos.size() == 0) {
+	if (videos_.size() == 0) {
 		qDebug() << "no videos found";
 		exit(-1);
 	}
 
 	this->Set_VideoPlayer();
 	this->Set_VideoButton();
+	videoPlayer->Set_VideoCount();	// Must call it after the VideoButton was set(Set theVideoButtons VideoPlayer Content)
 	this->Set_VolumeSlider();
 	this->Set_BrightSlider();
 
@@ -99,16 +100,16 @@ void Main_Grid::Set_VideoButton() {
 	// a list of the buttons
 	vector<TheButton*> buttons;
 	// create the four buttons
-	for (size_t i = 0; i < videos.size(); i++) {
+	for (size_t i = 0; i < videos_.size(); i++) {
 		TheButton *button = new TheButton(buttonScroll);
 		button->connect(button, SIGNAL(jumpTo(TheButtonInfo*)), videoPlayer, SLOT(jumpTo(TheButtonInfo*))); // when clicked, tell the player to play.
 		buttons.push_back(button);
 		layout->addWidget(button);
-		button->init(&videos.at(i));
+		button->init(&videos_.at(i));
 	}
 
 	// tell the player what buttons and videos are available
-	videoPlayer->setContent(&buttons, &videos);
+	videoPlayer->setContent(&buttons, &videos_);
 
 
 	buttonScroll->setFixedHeight(170);
@@ -120,25 +121,47 @@ void Main_Grid::Set_ControlButton() {
 }
 
 void Main_Grid::Set_VolumeSlider() {
-	this->volumeSlider = new QSlider(Qt::Horizontal);
+	QVBoxLayout * volumeVLayout = new QVBoxLayout();
+
+	this->volumeSlider = new QSlider(Qt::Vertical);
 	volumeSlider->setRange(0, 100);
-	volumeSlider->setTickPosition(QSlider::TicksBelow);
+	volumeSlider->setFixedWidth(25);
+	volumeSlider->setTickPosition(QSlider::TicksLeft);
 	volumeSlider->setTickInterval(10);
 	volumeSlider->setValue(kInitVolume);
 
-	volumeSlider->setFixedHeight(25);
-	this->addWidget(volumeSlider, 3, 1, 1, 10);
+	QLabel *volumeIcon = new QLabel();
+	QPixmap temp("./Resources/volume.jpg");
+	QPixmap image = temp.scaled(QSize(25, 25), Qt::KeepAspectRatio);
+	volumeIcon->setPixmap(image);
+	volumeIcon->setFixedSize(25, 25);
+
+	volumeVLayout->addWidget(volumeSlider);
+	volumeVLayout->addWidget(volumeIcon);
+
+	this->addLayout(volumeVLayout, 1, 11, 1, 1);
 }
 
 void Main_Grid::Set_BrightSlider() {
-	this->brightSlider = new QSlider(Qt::Horizontal);
+	QVBoxLayout * brightVLayout = new QVBoxLayout();
+
+	this->brightSlider = new QSlider(Qt::Vertical);
 	brightSlider->setRange(-100, 100);
-	brightSlider->setTickPosition(QSlider::TicksBelow);
+	brightSlider->setFixedWidth(25);
+	brightSlider->setTickPosition(QSlider::TicksRight);
 	brightSlider->setTickInterval(20);
 	brightSlider->setValue(kInitBright);
 
-	brightSlider->setFixedHeight(25);
-	this->addWidget(brightSlider, 4, 1, 1, 10);
+	QLabel *brightIcon = new QLabel();
+	QPixmap temp("./Resources/bright.jpg");
+	QPixmap image = temp.scaled(QSize(25, 25), Qt::KeepAspectRatio);
+	brightIcon->setPixmap(image);
+	brightIcon->setFixedSize(25, 25);
+
+	brightVLayout->addWidget(brightSlider);
+	brightVLayout->addWidget(brightIcon);
+
+	this->addLayout(brightVLayout, 1, 0, 1, 1);
 }
 
 void Main_Grid::Make_Connections() {
