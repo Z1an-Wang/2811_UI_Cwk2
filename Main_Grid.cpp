@@ -131,15 +131,15 @@ void Main_Grid::SetControlButton() {
 
 	this->next_video_ = new QPushButton();
 	next_video_->setFixedSize(45, 30);
-	next_video_->setText(">");
+	next_video_->setText("&Next>");
 
 	this->front_video_ = new QPushButton();
 	front_video_->setFixedSize(45, 30);
-	front_video_->setText("<");
+	front_video_->setText("<&Front");
 
 	this->pause_play_ = new QPushButton();
 	pause_play_->setFixedSize(75, 30);
-	pause_play_->setText("Pause");
+	pause_play_->setText("&Pause");
 
 	this->process_slider_ = new The_Process_Bar();
 

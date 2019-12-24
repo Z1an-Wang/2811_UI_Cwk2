@@ -27,14 +27,16 @@ void The_Player::playStateChanged (QMediaPlayer::State ms) {
 		QPushButton *button = dynamic_cast<Main_Grid *>(this->parent())->pause_play_;
 		if (ms == QMediaPlayer::PlayingState) {
 			QPushButton::disconnect(button, SIGNAL(clicked()), this, SLOT(play()));
-			button->setText("Pause");
+			button->setText("&Pause");
 			QPushButton::connect(button, SIGNAL(clicked()), this, SLOT(pause()));
 		}
-		else {
+		else if (ms == QMediaPlayer::PausedState) {
 			QPushButton::disconnect(button, SIGNAL(clicked()), this, SLOT(pause()));
-			button->setText("Play");
+			button->setText("&Play");
 			QPushButton::connect(button, SIGNAL(clicked()), this, SLOT(play()));
 		}
+		else
+			return;
 	}
 	catch (bad_cast) {
 		qDebug() << "Bad Cast in [playStateChanged]";
