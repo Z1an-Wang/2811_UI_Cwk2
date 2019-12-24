@@ -23,21 +23,22 @@ void The_Player::setContent(std::vector<TheButton*>* b, std::vector<TheButtonInf
 void The_Player::playStateChanged (QMediaPlayer::State ms) {
 
 // Use this block need to move the connect() from constructor to the Make_Connections
-/*	try {
-		QPushButton *play = dynamic_cast<Main_Grid *>(this->parent())->play_video_;
-		QPushButton *pause = dynamic_cast<Main_Grid *>(this->parent())->pause_video_;
-		QHBoxLayout *layout = dynamic_cast<Main_Grid *>(this->parent())->control_bar_layout_;
-
+	try {
+		QPushButton *button = dynamic_cast<Main_Grid *>(this->parent())->pause_play_;
 		if (ms == QMediaPlayer::PlayingState) {
-			layout->addWidget(pause, 0, 1);
+			QPushButton::disconnect(button, SIGNAL(clicked()), this, SLOT(play()));
+			button->setText("Pause");
+			QPushButton::connect(button, SIGNAL(clicked()), this, SLOT(pause()));
 		}
 		else {
-			layout->addWidget(play, 0, 1);
+			QPushButton::disconnect(button, SIGNAL(clicked()), this, SLOT(pause()));
+			button->setText("Play");
+			QPushButton::connect(button, SIGNAL(clicked()), this, SLOT(play()));
 		}
 	}
 	catch (bad_cast) {
 		qDebug() << "Bad Cast in [playStateChanged]";
-	}*/
+	}
 }
 
 // The [Public SLOT] to switch the video with the ButtonInfo provided.

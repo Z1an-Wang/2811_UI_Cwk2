@@ -137,23 +137,17 @@ void Main_Grid::SetControlButton() {
 	front_video_->setFixedSize(45, 30);
 	front_video_->setText("<");
 
-	this->pause_video_ = new QPushButton();
-	pause_video_->setFixedSize(75, 30);
-	pause_video_->setText("Pause");
-
-	this->play_video_ = new QPushButton();
-	play_video_->setFixedSize(75, 30);
-	play_video_->setText("Play");
+	this->pause_play_ = new QPushButton();
+	pause_play_->setFixedSize(75, 30);
+	pause_play_->setText("Pause");
 
 	this->process_slider_ = new The_Process_Bar();
 
 
 	control_bar_layout_->addWidget(front_video_);
-	control_bar_layout_->addWidget(play_video_);
-	control_bar_layout_->addWidget(pause_video_);
+	control_bar_layout_->addWidget(pause_play_);
 	control_bar_layout_->addWidget(next_video_);
 	control_bar_layout_->addWidget(process_slider_);
-
 	this->addLayout(control_bar_layout_, 2, 1, 1, 10);
 }
 
@@ -195,14 +189,14 @@ void Main_Grid::SetVideoButton() {
 void Main_Grid::MakeConnections() {
 	QSlider::connect(volume_slider_, SIGNAL(valueChanged(int)), video_player_, SLOT(setVolume(int)));
 	QMediaPlayer::connect(video_player_, SIGNAL(volumeChanged(int)), volume_slider_, SLOT(setValue(int)));
+	QMediaPlayer::connect(video_player_, SIGNAL(stateChanged(QMediaPlayer::State)), video_player_, SLOT(playStateChanged(QMediaPlayer::State)));
 
 	QSlider::connect(bright_slider_, SIGNAL(valueChanged(int)), video_widget_, SLOT(setBrightness(int)));
 	QVideoWidget::connect(video_widget_, SIGNAL(brightnessChanged(int)), bright_slider_, SLOT(setValue(int)));
 
 	QPushButton::connect(next_video_, SIGNAL(clicked()), video_player_, SLOT(JumpNext()));
 	QPushButton::connect(front_video_, SIGNAL(clicked()), video_player_, SLOT(JumpFront()));
-	QPushButton::connect(pause_video_, SIGNAL(clicked()), video_player_, SLOT(pause()));
-	QPushButton::connect(play_video_, SIGNAL(clicked()), video_player_, SLOT(play()));
+	QPushButton::connect(pause_play_, SIGNAL(clicked()), video_player_, SLOT(pause()));
 
 	QMediaPlayer::connect(video_player_, SIGNAL(durationChanged(qint64)), process_slider_, SLOT(SetProcessRange(qint64)));
 	QMediaPlayer::connect(video_player_, SIGNAL(positionChanged(qint64)), process_slider_, SLOT(SetCurrentPosition(qint64)));

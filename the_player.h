@@ -32,7 +32,6 @@ private:
 public:
     The_Player(QObject *parent) : QMediaPlayer(parent) {
         setVolume(kInitVolume);     // be slightly less annoying
-        connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );
     }
 
     // all buttons have been setup, store pointers here

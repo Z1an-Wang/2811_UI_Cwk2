@@ -39,6 +39,8 @@ public:
 
 	void InitAll();
 
+	// Used in the player class to control the video status
+	QPushButton * pause_play_;
 
 private:
 	QWidget *window_;
@@ -61,8 +63,6 @@ private:
 	QHBoxLayout * control_bar_layout_;
 	QPushButton * next_video_;
 	QPushButton * front_video_;
-	QPushButton * pause_video_;
-	QPushButton * play_video_;
 	QPushButton * full_screen_;
 	The_Process_Bar * process_slider_;
 
