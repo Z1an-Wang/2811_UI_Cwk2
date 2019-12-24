@@ -5,10 +5,13 @@
 #include <string>
 #include <QApplication>
 #include <QtGui>
+
+// About the media player
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <QtMultimedia/QMediaPlayer.h>
 #include <QtMultimedia/QMediaPlaylist.h>
 
+// All need widgets
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QHBoxLayout>
@@ -16,6 +19,7 @@
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QLabel>
 
+// To support the import module
 #include <QtCore/QDir.h>
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QFileIconProvider>
@@ -42,11 +46,21 @@ public:
 	// Used in the player class to control the video status
 	QPushButton * pause_play_;
 
+// Change the none-agrs signal to bool-args signal;
+// For the fullscreen button [clicked() -> setFullScreen(bool)]
+signals:
+	void isFullScreen(bool clicked);
+
+public slots:
+	void FullScreenClicked(){emit isFullScreen(true);}
+
 private:
 	QWidget *window_;
-	vector<TheButtonInfo> GetInfoIn(string);
-	vector<TheButtonInfo> videos_;
+	vector<TheButtonInfo> GetInfoIn(string);	//Get Icon and Info for each video button
+	vector<TheButtonInfo> videos_;				// Data field to store the Info for each button
 
+	// Different Modules for the whole Grid Layout
+	// Set widgets in private field in order to make connection.
 	void SetVideoPlayer();
 	QVideoWidget * video_widget_;
 	The_Player * video_player_;	// Used in Set_VideoButton to set video content
@@ -69,7 +83,7 @@ private:
 	void SetVideoButton();
 	QScrollArea * button_scroll_;
 
-
+	// Deal with all connections
 	void MakeConnections();
 
 };

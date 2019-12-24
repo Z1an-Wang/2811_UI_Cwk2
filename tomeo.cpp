@@ -28,13 +28,13 @@ int main(int argc, char *argv[]) {
     // create the Qt Application
     QApplication app(argc, argv);
 
-	// create the main window and layout
+	// create the main window and set the window size
 	QWidget window;
 	window.setMinimumSize(300, 200);
 	window.setGeometry(40, 40, 800, 680);
 
+    // Create the main grid layout and init all elements
 	Main_Grid *main_content = new Main_Grid(&window);
-
 	main_content->InitAll();
 
 	window.setLayout(main_content);
