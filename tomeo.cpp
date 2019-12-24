@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
 	Main_Grid *main_content = new Main_Grid(&window);
 
-	main_content->Init_All();
+	main_content->InitAll();
 
 	window.setLayout(main_content);
     window.setWindowTitle("tomeo");

@@ -5,7 +5,6 @@
 #include <string>
 #include <QApplication>
 #include <QtGui>
-#include <QDebug.h>
 #include <QtMultimediaWidgets/QVideoWidget>
 #include <QtMultimedia/QMediaPlayer.h>
 #include <QtMultimedia/QMediaPlaylist.h>
@@ -27,47 +26,51 @@
 
 using namespace std;
 
+class The_Process_Bar;
+class The_Player;
+
 class Main_Grid : public QGridLayout
 {
 	Q_OBJECT
 
 public:
-	Main_Grid(QWidget *parent) :QGridLayout(parent) { this->window = parent;}
+	Main_Grid(QWidget *parent) :QGridLayout(parent) { this->window_ = parent;}
 	~Main_Grid() {}
 
-	void Init_All();
+	void InitAll();
 
 
 private:
-	QWidget *window;
+	QWidget *window_;
 	vector<TheButtonInfo> GetInfoIn(string);
 	vector<TheButtonInfo> videos_;
 
-	void Set_VideoPlayer();
-	QVideoWidget * videoWidget;
-	ThePlayer * videoPlayer;	// Used in Set_VideoButton to set video content
+	void SetVideoPlayer();
+	QVideoWidget * video_widget_;
+	The_Player * video_player_;	// Used in Set_VideoButton to set video content
 
-	void Set_VolumeSlider();
-	QSlider * volumeSlider;
+	void SetVolumeSlider();
+	QSlider * volume_slider_;
 	int volume_;
 
-	void Set_BrightSlider();
-	QSlider * brightSlider;
+	void SetBrightSlider();
+	QSlider * bright_slider_;
 	int bright_;
 
-	void Set_ControlButton();
-	QHBoxLayout * controlBarLayout_;
-	QPushButton * nextVideo_;
-	QPushButton * frontVideo_;
-	QPushButton * pauseVideo_;
-	QPushButton * playVideo_;
+	void SetControlButton();
+	QHBoxLayout * control_bar_layout_;
+	QPushButton * next_video_;
+	QPushButton * front_video_;
+	QPushButton * pause_video_;
+	QPushButton * play_video_;
+	QPushButton * full_screen_;
+	The_Process_Bar * process_slider_;
+
+	void SetVideoButton();
+	QScrollArea * button_scroll_;
 
 
-	void Set_VideoButton();
-	QScrollArea * buttonScroll;
-
-
-	void Make_Connections();
+	void MakeConnections();
 
 };
 

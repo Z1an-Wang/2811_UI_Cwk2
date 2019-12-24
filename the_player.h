@@ -8,7 +8,7 @@
 
 #include <QApplication>
 #include <QMediaPlayer>
-#include <QDebug.h>
+#include <QtWidgets/QSlider>
 #include "the_button.h"
 #include <vector>
 
@@ -17,7 +17,7 @@ using namespace std;
 const int kInitVolume = 10;
 const int kInitBright = 0;
 
-class ThePlayer : public QMediaPlayer {
+class The_Player : public QMediaPlayer {
 
 Q_OBJECT
 
@@ -26,11 +26,11 @@ private:
     // Video Url used to create MediaContent [ QMediaContent(const QUrl &url) ]
     std::vector<TheButtonInfo>* infos_;
     std::vector<TheButton*>* buttons_;
-	int totalVideo_;
-    int currentVideo_;
+	int total_video_;
+    int current_video_;
 
 public:
-    ThePlayer(QObject *parent) : QMediaPlayer(parent) {
+    The_Player(QObject *parent) : QMediaPlayer(parent) {
         setVolume(kInitVolume);     // be slightly less annoying
         connect (this, SIGNAL (stateChanged(QMediaPlayer::State)), this, SLOT (playStateChanged(QMediaPlayer::State)) );
     }
@@ -46,9 +46,27 @@ private slots:
 public slots:
 
     // start playing this ButtonInfo
-    void jumpTo (TheButtonInfo* button);
-	void jumpNext();
-	void jumpFront();
+    void JumpTo (TheButtonInfo* button);
+	void JumpNext();
+	void JumpFront();
 };
 
-#endif //CW2_THE_PLAYER_H
+class The_Process_Bar : public QSlider{
+
+    Q_OBJECT
+
+public:
+    // Qt::Orientation orientation, QWidget *parent = nullptr
+    The_Process_Bar(QWidget *parent = nullptr) : QSlider(Qt::Horizontal, parent) {}
+
+public slots : 
+    void SetProcessRange(qint64 position);
+    void SetCurrentPosition(qint64 position);
+
+private:
+
+
+};
+
+//CW2_THE_PLAYER_H
+#endif 

@@ -9,25 +9,24 @@
 // This function will call at the initial stage 
 // To pass the two reference to the data field of the player class
 // Then jumpTo the first video to play
-void ThePlayer::setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i){
+void The_Player::setContent(std::vector<TheButton*>* b, std::vector<TheButtonInfo>* i){
     this->buttons_ = b;
     this->infos_ = i;
-	this->totalVideo_ = buttons_->size();
-	this->currentVideo_ = 0;
-    jumpTo(buttons_ -> at(currentVideo_) -> info);
+	this->total_video_ = buttons_->size();
+	this->current_video_ = 0;
+    JumpTo(buttons_ -> at(current_video_) -> info);
 }
 
 
 // SLOT Define in <the_player> class
 
-void ThePlayer::playStateChanged (QMediaPlayer::State ms) {
+void The_Player::playStateChanged (QMediaPlayer::State ms) {
 
 // Use this block need to move the connect() from constructor to the Make_Connections
 /*	try {
-		QPushButton *play = dynamic_cast<Main_Grid *>(this->parent())->playVideo_;
-		QPushButton *pause = dynamic_cast<Main_Grid *>(this->parent())->pauseVideo_;
-		QGridLayout *layout = dynamic_cast<Main_Grid *>(this->parent())->controlBarLayout_;
-		QRect g = static_cast<Main_Grid *>(this->parent())->g;
+		QPushButton *play = dynamic_cast<Main_Grid *>(this->parent())->play_video_;
+		QPushButton *pause = dynamic_cast<Main_Grid *>(this->parent())->pause_video_;
+		QGridLayout *layout = dynamic_cast<Main_Grid *>(this->parent())->control_bar_layout_;
 
 		if (ms == QMediaPlayer::PlayingState) {
 			layout->addWidget(pause, 0, 1);
@@ -42,21 +41,28 @@ void ThePlayer::playStateChanged (QMediaPlayer::State ms) {
 }
 
 // The [Public SLOT] to switch the video with the ButtonInfo provided.
-void ThePlayer::jumpTo (TheButtonInfo* button) {
+void The_Player::JumpTo (TheButtonInfo* button) {
     setMedia( * button -> url);
     play();
 }
 
-void ThePlayer::jumpNext() {
+void The_Player::JumpNext() {
 
-	currentVideo_ = (currentVideo_ + 1) % totalVideo_;
-	setMedia( * infos_ ->at(currentVideo_).url);
+	current_video_ = (current_video_ + 1) % total_video_;
+	setMedia( * infos_ ->at(current_video_).url);
 	play();
 }
 
-void ThePlayer::jumpFront() {
+void The_Player::JumpFront() {
 
-	currentVideo_ = --currentVideo_ < 0 ? totalVideo_ - 1 : currentVideo_;
-	setMedia(*infos_->at(currentVideo_).url);
+	current_video_ = --current_video_ < 0 ? total_video_ - 1 : current_video_;
+	setMedia(*infos_->at(current_video_).url);
 	play();
+}
+
+void The_Process_Bar::SetProcessRange(qint64 position){
+	QSlider::setRange(0, int(position));
+}
+void The_Process_Bar::SetCurrentPosition(qint64 position){
+	QSlider::setValue(int(position));
 }
