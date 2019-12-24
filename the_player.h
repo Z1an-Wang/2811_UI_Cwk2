@@ -49,6 +49,7 @@ public slots:
     void JumpTo (TheButtonInfo* button);
 	void JumpNext();
 	void JumpFront();
+	void SetPosition(int);
 };
 
 class The_Process_Bar : public QSlider{

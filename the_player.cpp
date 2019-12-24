@@ -26,7 +26,7 @@ void The_Player::playStateChanged (QMediaPlayer::State ms) {
 /*	try {
 		QPushButton *play = dynamic_cast<Main_Grid *>(this->parent())->play_video_;
 		QPushButton *pause = dynamic_cast<Main_Grid *>(this->parent())->pause_video_;
-		QGridLayout *layout = dynamic_cast<Main_Grid *>(this->parent())->control_bar_layout_;
+		QHBoxLayout *layout = dynamic_cast<Main_Grid *>(this->parent())->control_bar_layout_;
 
 		if (ms == QMediaPlayer::PlayingState) {
 			layout->addWidget(pause, 0, 1);
@@ -58,6 +58,10 @@ void The_Player::JumpFront() {
 	current_video_ = --current_video_ < 0 ? total_video_ - 1 : current_video_;
 	setMedia(*infos_->at(current_video_).url);
 	play();
+}
+
+void The_Player::SetPosition(int position) {
+	QMediaPlayer::setPosition(qint64(position));
 }
 
 void The_Process_Bar::SetProcessRange(qint64 position){

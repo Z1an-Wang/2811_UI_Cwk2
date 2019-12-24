@@ -152,6 +152,7 @@ void Main_Grid::SetControlButton() {
 	control_bar_layout_->addWidget(play_video_);
 	control_bar_layout_->addWidget(pause_video_);
 	control_bar_layout_->addWidget(next_video_);
+	control_bar_layout_->addWidget(process_slider_);
 
 	this->addLayout(control_bar_layout_, 2, 1, 1, 10);
 }
@@ -202,4 +203,8 @@ void Main_Grid::MakeConnections() {
 	QPushButton::connect(front_video_, SIGNAL(clicked()), video_player_, SLOT(JumpFront()));
 	QPushButton::connect(pause_video_, SIGNAL(clicked()), video_player_, SLOT(pause()));
 	QPushButton::connect(play_video_, SIGNAL(clicked()), video_player_, SLOT(play()));
+
+	QMediaPlayer::connect(video_player_, SIGNAL(durationChanged(qint64)), process_slider_, SLOT(SetProcessRange(qint64)));
+	QMediaPlayer::connect(video_player_, SIGNAL(positionChanged(qint64)), process_slider_, SLOT(SetCurrentPosition(qint64)));
+	QSlider::connect(process_slider_, SIGNAL(valueChanged(int)), video_player_, SLOT(SetPosition(int)));
 }
