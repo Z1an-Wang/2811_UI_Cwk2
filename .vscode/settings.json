@@ -9,7 +9,9 @@
         "qfileinfo": "cpp",
         "qapplication": "cpp",
         "qpushbutton": "cpp",
-        "qmediaplaylist": "cpp"
+        "qmediaplaylist": "cpp",
+        "qmediaplayer": "cpp",
+        "qslider": "cpp"
     },
      "files.exclude": {
         //  "**/*.pro":true,

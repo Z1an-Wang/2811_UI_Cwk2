@@ -58,12 +58,12 @@ void Main_Grid::InitAll() {
 	setRowStretch(0, 0);	// Title (void for the moment)
 	setRowStretch(1, 1);	// The main Video Window and the Sliders
 	setRowStretch(2, 0);	// The Control button and Video progress bar
-	setRowStretch(3, 0);	// The image buttons of the video 
+	setRowStretch(3, 0);	// The image buttons of the video
 	setRowStretch(4, 0);	// Void for the moment
 
 	// Finally, make all connections
 	this->MakeConnections();
-	
+
 	return;
 }
 
@@ -186,7 +186,7 @@ void Main_Grid::SetVideoButton() {
 
 	// a list of the buttons
 	vector<TheButton*> buttons;
-	// Create all video buttons 
+	// Create all video buttons
 	// connect the buttons to switching specific videos
 	// set it into the widget and class data field
 	for (size_t i = 0; i < videos_.size(); i++) {

@@ -4,16 +4,14 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/Src/qtbase/include/QtCore",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/Src/qtbase/include/QtGui",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/Src/qtbase/include/QtWidgets",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/Src/qtmultimedia/include/QtMultimedia",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/Src/qtmultimedia/include/QtMultimediaWidgets"
+                "${env:QT_HEADERS}/**",
+                "/opt/Qt5.13.2/5.13.2/Src/qtmultimedia/include/QtMultimedia",
+                "/opt/Qt5.13.2/5.13.2/Src/qtmultimedia/include/QtMultimediaWidgets"
             ],
             "defines": [],
             "macFrameworkPath": [
-                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/System/Library/Frameworks",
-                "/Users/prince_an/Documents/Qt_5.12.5/5.12.5/clang_64/lib"
+                "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks",
+                "${env:QT_LIBS}"
             ],
             "compilerPath": "/usr/bin/clang",
             "cStandard": "c11",

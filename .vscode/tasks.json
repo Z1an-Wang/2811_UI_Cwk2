@@ -6,7 +6,7 @@
         {
             "label": "build and execute",
             "type": "shell",
-            "command": "make && ${workspaceFolder}/cwk2.app/Contents/MacOS/cwk2",
+            "command": "make -j4 && ${workspaceFolder}/cwk2.app/Contents/MacOS/cwk2",
             // "args": ["1"],
             "group": {
                 "kind": "build",
@@ -17,7 +17,7 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make clean && make",
+            "command": "make clean && make -j4",
             "group":{
                 "kind": "test",
                 "isDefault": true
