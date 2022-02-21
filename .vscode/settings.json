@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "qmainwindow": "cpp",
+        "qtwidgets": "cpp",
+        "vector": "cpp",
+        "ios": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "qfileinfo": "cpp",
+        "qapplication": "cpp",
+        "qpushbutton": "cpp",
+        "qmediaplaylist": "cpp",
+        "qmediaplayer": "cpp",
+        "qslider": "cpp"
+    },
+     "files.exclude": {
+        //  "**/*.pro":true,
+         "**/*.o":true,
+         "**/.qmake.stash":true,
+         "**/*.pro.user":true,
+         "**/moc_*.h": true,
+         "**/moc_*.cpp":true
+     },
+     "editor.tabSize": 4
+}
