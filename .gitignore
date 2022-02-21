@@ -1,8 +1,8 @@
 # This file is used to ignore files which are generated
 # ----------------------------------------------------------------------------
-.vscode/
+# .vscode/
 .gitignore
-Resources/
+# Resources/
 .DS_Store
 Debug/
 Release/
